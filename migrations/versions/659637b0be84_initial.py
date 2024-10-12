@@ -1,8 +1,8 @@
-"""Database creation
+"""Initial
 
-Revision ID: 86302dc4a453
+Revision ID: 659637b0be84
 Revises: 
-Create Date: 2024-10-12 16:38:45.100628
+Create Date: 2024-10-12 18:07:13.115892
 
 """
 from typing import Sequence, Union
@@ -12,7 +12,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision: str = '86302dc4a453'
+revision: str = '659637b0be84'
 down_revision: Union[str, None] = None
 branch_labels: Union[str, Sequence[str], None] = None
 depends_on: Union[str, Sequence[str], None] = None
@@ -30,9 +30,12 @@ def upgrade() -> None:
         sa.Column('id', sa.Integer(), nullable=False),
         sa.Column('email', sa.String(), nullable=False),
         sa.Column('username', sa.String(), nullable=False),
-        sa.Column('password', sa.String(), nullable=False),
         sa.Column('registered_at', sa.TIMESTAMP(), nullable=True),
         sa.Column('role_id', sa.Integer(), nullable=True),
+        sa.Column('hashed_password', sa.String(), nullable=False),
+        sa.Column('is_active', sa.Boolean(), nullable=False),
+        sa.Column('is_superuser', sa.Boolean(), nullable=False),
+        sa.Column('is_verified', sa.Boolean(), nullable=False),
         sa.ForeignKeyConstraint(['role_id'], ['roles.id'], ),
         sa.PrimaryKeyConstraint('id')
     )
